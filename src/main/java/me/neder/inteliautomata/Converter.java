@@ -54,10 +54,6 @@ public final class Converter {
     public static String convert(@NotNull String eng) {
         StringBuilder res = new StringBuilder();
 
-        if (eng.length() == 0) {
-            return res.toString();
-        }
-		
         int nCho = -1, nJung = -1, nJong = -1; // 초성, 중성, 종성
 
         for (int i = 0; i < eng.length(); i++) {
@@ -177,42 +173,55 @@ public final class Converter {
                     // 복자음 다시 분해
                     int newCho; // (임시용) 초성
 
-                    if (nJong == 2) { // ㄱ, ㅅ
-                        nJong = 0;
-                        newCho = 9;
-                    } else if (nJong == 4) { // ㄴ, ㅈ
-                        nJong = 3;
-                        newCho = 12;
-                    } else if (nJong == 5) { // ㄴ, ㅎ
-                        nJong = 3;
-                        newCho = 18;
-                    } else if (nJong == 8) { // ㄹ, ㄱ
-                        nJong = 7;
-                        newCho = 0;
-                    } else if (nJong == 9) { // ㄹ, ㅁ
-                        nJong = 7;
-                        newCho = 6;
-                    } else if (nJong == 10) { // ㄹ, ㅂ
-                        nJong = 7;
-                        newCho = 7;
-                    } else if (nJong == 11) { // ㄹ, ㅅ
-                        nJong = 7;
-                        newCho = 9;
-                    } else if (nJong == 12) { // ㄹ, ㅌ
-                        nJong = 7;
-                        newCho = 16;
-                    } else if (nJong == 13) { // ㄹ, ㅍ
-                        nJong = 7;
-                        newCho = 17;
-                    } else if (nJong == 14) { // ㄹ, ㅎ
-                        nJong = 7;
-                        newCho = 18;
-                    } else if (nJong == 17) { // ㅂ, ㅅ
-                        nJong = 16;
-                        newCho = 9;
-                    } else { // 복자음 아님
-                        newCho = CHO_DATA.indexOf(JONG_DATA.charAt(nJong));
-                        nJong = -1;
+                    switch (nJong) {
+                        case 2:  // ㄱ, ㅅ
+                            nJong = 0;
+                            newCho = 9;
+                            break;
+                        case 4:  // ㄴ, ㅈ
+                            nJong = 3;
+                            newCho = 12;
+                            break;
+                        case 5:  // ㄴ, ㅎ
+                            nJong = 3;
+                            newCho = 18;
+                            break;
+                        case 8:  // ㄹ, ㄱ
+                            nJong = 7;
+                            newCho = 0;
+                            break;
+                        case 9:  // ㄹ, ㅁ
+                            nJong = 7;
+                            newCho = 6;
+                            break;
+                        case 10:  // ㄹ, ㅂ
+                            nJong = 7;
+                            newCho = 7;
+                            break;
+                        case 11:  // ㄹ, ㅅ
+                            nJong = 7;
+                            newCho = 9;
+                            break;
+                        case 12:  // ㄹ, ㅌ
+                            nJong = 7;
+                            newCho = 16;
+                            break;
+                        case 13:  // ㄹ, ㅍ
+                            nJong = 7;
+                            newCho = 17;
+                            break;
+                        case 14:  // ㄹ, ㅎ
+                            nJong = 7;
+                            newCho = 18;
+                            break;
+                        case 17:  // ㅂ, ㅅ
+                            nJong = 16;
+                            newCho = 9;
+                            break;
+                        default:  // 복자음 아님
+                            newCho = CHO_DATA.indexOf(JONG_DATA.charAt(nJong));
+                            nJong = -1;
+                            break;
                     }
                     if (nCho != -1) { // 앞글자가 초성+중성+(종성)
                         res.append(makeHangulChar(nCho, nJung, nJong));
