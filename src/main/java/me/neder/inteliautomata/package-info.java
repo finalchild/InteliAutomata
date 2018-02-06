@@ -20,6 +20,7 @@
 
 /**
  * InteliAutomata's main package
+ *
  * @author Neder
  * @author Final Child
  * @since 0.1.0

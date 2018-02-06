@@ -28,17 +28,19 @@ import java.util.regex.Pattern;
 
 /**
  * The class used to convert alphabet input into hangul.
+ *
  * @author Neder
  * @author Final Child
  * @since 0.1.0
  */
 public final class InteliAutomata {
 
-    private InteliAutomata() {}
-	
+    private InteliAutomata() {
+    }
+
     /**
      * Automatically checks whether the alphabet input should be converted and converts it into hangul.
-     * 
+     *
      * @param str the string to convert
      * @return the converted string
      * @since 0.1.0
@@ -68,7 +70,7 @@ public final class InteliAutomata {
             }
             sb.append(" ");
         }
-		
+
         return sb.toString();
     }
 
@@ -88,7 +90,7 @@ public final class InteliAutomata {
         if (dicm.find()) {
             return false;
         }
-		
+
         // Pattern 2 - ㅋㅋㅋㅋㅋㅋㅋ 등 한 문자만 여러번 치는 경우
         char ch = str.charAt(0);
         int count = 0;
@@ -101,7 +103,7 @@ public final class InteliAutomata {
         if (str.length() == count) {
             return true;
         }
-		
+
         // Pattern 3 - ㅇㅅㅇㅅㅇㅅㅇ 등 두 키를 반복해서 누르는 경우
         int half = str.length() / 2; // 반으로 나누고 소수점이 있는 경우(홀수) 버림
         String[] checkes = new String[half];
@@ -127,7 +129,7 @@ public final class InteliAutomata {
         } else {
             return match;
         }
-			
+
         return false; // 아무 조건에도 맞지 않다면
     }
 

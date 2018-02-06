@@ -30,13 +30,15 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * The alphabet input to hangul converter.
+ *
  * @author Neder
  * @author Final Child
  * @since 0.1.0
  */
 public final class Converter {
 
-    private Converter() {}
+    private Converter() {
+    }
 
     public static final String ENG_KEY = "rRseEfaqQtTdwWczxvgkoiOjpuPhynbml";
     public static final String KOR_KEY = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡㅣ";
@@ -46,6 +48,7 @@ public final class Converter {
 
     /**
      * Converts the alphabet input string into hangul.
+     *
      * @param eng the string to be converted
      * @since 0.1.0
      */
@@ -278,13 +281,14 @@ public final class Converter {
                 }
             }
         }
-		
+
         return res.toString();
     }
 
     /**
      * Makes a complete hangul character with the chosung, jungsung, jongsung.
-     * @param nCho Chosung
+     *
+     * @param nCho  Chosung
      * @param nJung Jungsung
      * @param nJong Jongsung
      * @return The complete hangul character
