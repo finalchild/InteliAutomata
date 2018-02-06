@@ -34,7 +34,9 @@ import org.jetbrains.annotations.NotNull;
  * @author Final Child
  * @since 0.1.0
  */
-public class Converter {
+public final class Converter {
+
+    private Converter() {}
 
     public static final String ENG_KEY = "rRseEfaqQtTdwWczxvgkoiOjpuPhynbml";
     public static final String KOR_KEY = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎㅏㅐㅑㅒㅓㅔㅕㅖㅗㅛㅜㅠㅡㅣ";
@@ -47,8 +49,9 @@ public class Converter {
      * @param eng the string to be converted
      * @since 0.1.0
      */
+    @Contract(pure = true)
     @NotNull
-    public static String convert(String eng) {
+    public static String convert(@NotNull String eng) {
         StringBuilder res = new StringBuilder();
 
         if (eng.length() == 0) {
@@ -284,10 +287,4 @@ public class Converter {
 
     }
 
-    /**
-     * Do NOT make an instance of this class.
-     */
-    private Converter() {
-        throw new UnsupportedOperationException();
-    }
 }

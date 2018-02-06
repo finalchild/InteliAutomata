@@ -20,6 +20,7 @@
 
 package me.neder.inteliautomata;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
@@ -31,7 +32,9 @@ import java.util.regex.Pattern;
  * @author Final Child
  * @since 0.1.0
  */
-public class InteliAutomata {
+public final class InteliAutomata {
+
+    private InteliAutomata() {}
 	
     /**
      * Automatically checks whether the alphabet input should be converted and converts it into hangul.
@@ -40,11 +43,12 @@ public class InteliAutomata {
      * @return the converted string
      * @since 0.1.0
      */
+    @Contract(pure = true)
     @NotNull
-    public static String convert(String str) {
+    public static String convert(@NotNull String str) {
         StringBuilder sb = new StringBuilder();
         String[] strsplit = str.split(" ");
-        Pattern pattern = Pattern.compile("(ㄱ|ㄲ|ㄳ|ㄴ|ㄵ|ㄶ|ㄷ|ㄹ|ㄺ|ㄻ|ㄼ|ㄽ|ㄾ|ㄿ|ㅀ|ㅁ|ㅂ|ㅄ|ㅅ|ㅆ|ㅇ|ㅈ|ㅊ|ㅋ|ㅌ|ㅍ|ㅎ|ㄸ|ㅃ|ㅉ|ㅏ|ㅐ|ㅑ|ㅒ|ㅓ|ㅔ|ㅕ|ㅖ|ㅗ|ㅘ|ㅙ|ㅚ|ㅛ|ㅜ|ㅝ|ㅞ|ㅟ|ㅠ|ㅡ|ㅢ|ㅣ)");
+        Pattern pattern = Pattern.compile("([ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎㄸㅃㅉㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ])");
 
         for (String aStrsplit : strsplit) {
             String converted = Converter.convert(aStrsplit);
@@ -75,7 +79,8 @@ public class InteliAutomata {
      * @return whether it should be converted
      * @since 0.1.0
      */
-    private static boolean checkString(String str) {
+    @Contract(pure = true)
+    private static boolean checkString(@NotNull String str) {
         // Pattern 1 - 변환 금지할 단어 사전 정의(...)
         Pattern dic = Pattern.compile("(to|spawn)"); // 추가하자...
         Matcher dicm = dic.matcher(str);
@@ -117,23 +122,13 @@ public class InteliAutomata {
         }
         if (str.length() % 2 == 1) { // 홀수일 경우 추가적으로 체크를 한다.
             if (str.charAt(0) == str.charAt(str.length() - 1)) { // 첫 번째 글자와 마지막 글자가 일치해야 함
-                if (match) {
-                    return true;
-                }
+                return match;
             }
         } else {
-            if (match) {
-                return true;
-            }
+            return match;
         }
 			
         return false; // 아무 조건에도 맞지 않다면
     }
 
-    /**
-     * Do NOT make an instance of this class.
-     */
-    private InteliAutomata() {
-        throw new UnsupportedOperationException();
-    }
 }
